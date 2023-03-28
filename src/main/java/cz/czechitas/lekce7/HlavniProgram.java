@@ -20,6 +20,12 @@ public class HlavniProgram {
         System.out.printf("Monika má svátek %s.", svatky.kdyMaSvatek("Monika")).println();
         System.out.printf("Eva je v seznamu svátků: %b.", svatky.jeVSeznamu("Eva")).println();
 
+
+
+
+
+
+
 /*
         System.out.println("V seznamu jsou následující jména:");
         svatky.getSeznamJmen().forEach(jmeno -> System.out.printf("- %s", jmeno).println());
