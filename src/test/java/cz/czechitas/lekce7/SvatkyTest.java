@@ -71,7 +71,7 @@ class SvatkyTest {
      * Testuje metodu {@link Svatky#jeVSeznamu(String)}
      */
     @Test
-    void jeVSeznamuExistujici() {
+    void jeVSeznamuExistujiciJmeno() {
         //TODO Otestovat, že najde v seznamu existující jméno
     /*
     Svatky svatky = new Svatky();
@@ -91,7 +91,7 @@ class SvatkyTest {
     }
 
     @Test
-    void jeVSeznamuNeexistujici() {
+    void jeVSeznamuNeexistujiciJmeno() {
         //TODO Otestovat, že najde v seznamu neexistující jméno
         //Arrange
         Svatky svatky = new Svatky();
@@ -111,9 +111,9 @@ class SvatkyTest {
         //TODO Otestovat, že vrací počet jmen, která máme v seznamu
         //Arrange
         Svatky svatky = new Svatky();
-        Integer ocekavanyVysledek = 37;
+        int ocekavanyVysledek = 37;
         //Act
-        Integer skutecnyVysledek = svatky.getPocetJmen();
+        int skutecnyVysledek = svatky.getPocetJmen();
         //Assert
         assertEquals(ocekavanyVysledek, skutecnyVysledek);
     }
@@ -122,14 +122,13 @@ class SvatkyTest {
      * Testuje metodu {@link Svatky#getSeznamJmen()}
      */
     @Test
-    @Disabled
     void getSeznamJmen() {
         //TODO Zkontrolovat, že seznam jmen má správný počet položek.
         //Arrange
         Svatky svatky = new Svatky();
-        String ocekavanyVysledek = ;
+        int ocekavanyVysledek = 37;
         //Act
-        String skutecnyVysledek = svatky.getSeznamJmen();
+        int skutecnyVysledek = svatky.getSeznamJmen().size();
         //Assert
         assertEquals(ocekavanyVysledek, skutecnyVysledek);
     }
@@ -143,10 +142,13 @@ class SvatkyTest {
         //Arrange
         Svatky svatky = new Svatky();
         String jmeno = "Dana";
-        MonthDay ocekavanyVysledek = MonthDay.of(12, 11);
+        MonthDay denSvatku = MonthDay.of(12, 11);
         //Act
-        MonthDay skutecnyVysledek = svatky.pridatSvatek(jmeno, den, mesic);
+        svatky.pridatSvatek(jmeno, denSvatku);
+        MonthDay skutecnyDenSvatku = svatky.kdyMaSvatek(jmeno);
         //Assert
+        assertTrue(svatky.jeVSeznamu(jmeno));
+        assertEquals(denSvatku, skutecnyDenSvatku);
     }
 
     /**
@@ -156,23 +158,37 @@ class SvatkyTest {
     void pridatSvatekDenMesicMonth() {
         //TODO Otestuje, že je jméno v seznamu svátků a že má přiřazen správný den
         //Arrange
-
+        Svatky svatky = new Svatky();
+        String jmeno = "Dana";
+        int denSvatku = 11;
+        int mesicSvatku = 12;
         //Act
-
+        svatky.pridatSvatek(jmeno, denSvatku, mesicSvatku);
+        MonthDay skutecneDatumSvatku = svatky.kdyMaSvatek(jmeno);
         //Assert
+        assertTrue(svatky.jeVSeznamu(jmeno));
+        assertEquals(denSvatku, skutecneDatumSvatku.getDayOfMonth());
+        assertEquals(mesicSvatku, skutecneDatumSvatku.getMonthValue());
     }
 
     /**
      * Testuje metodu {@link Svatky#pridatSvatek(String, MonthDay)}
      */
     @Test
-    void prridatSvatekMonthDay() {
+    void pridatSvatekMonthDay() {
         //TODO Otestuje, že je jméno v seznamu svátků a že má přiřazen správný den
         //Arrange
-
+        Svatky svatky = new Svatky();
+        String jmeno = "Dana";
+        int denSvatku = 11;
+        Month mesicSvatku = Month.DECEMBER;
         //Act
-
+        svatky.pridatSvatek(jmeno, denSvatku, mesicSvatku);
+        MonthDay skutecneDatumSvatku = svatky.kdyMaSvatek(jmeno);
         //Assert
+        assertTrue(svatky.jeVSeznamu(jmeno));
+        assertEquals(denSvatku, skutecneDatumSvatku.getDayOfMonth());
+        assertEquals(mesicSvatku, skutecneDatumSvatku.getMonth());
     }
 
     /**
@@ -184,9 +200,11 @@ class SvatkyTest {
         //Arrange
         Svatky svatky = new Svatky();
         String jmeno = "Nataša";
-        String ocekavanyVysledek =
+        int ocekavanyVysledek = 36;
         //Act
-        String skutecnyVysledek = svatky.smazatSvatek(jmeno);
+        svatky.smazatSvatek(jmeno);
         //Assert
+        assertEquals(ocekavanyVysledek, svatky.getPocetJmen());
+
     }
 }
