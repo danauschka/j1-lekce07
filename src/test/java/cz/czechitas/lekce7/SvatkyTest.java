@@ -33,11 +33,9 @@ class SvatkyTest {
         String jmenoNatasa = "Nataša";
         String jmenoEva = "Eva";
         MonthDay ocekavanyVysledekProNatasu = MonthDay.of(5, 18);
-
         //Act
         MonthDay skutecnyVysledekProNatasu = svatky.kdyMaSvatek(jmenoNatasa);
         MonthDay skutecnyVysledekProEvu = svatky.kdyMaSvatek(jmenoEva);
-
         //Assert
         assertEquals(ocekavanyVysledekProNatasu, skutecnyVysledekProNatasu);
         assertNull(skutecnyVysledekProEvu);
@@ -73,17 +71,9 @@ class SvatkyTest {
     @Test
     void jeVSeznamuExistujiciJmeno() {
         //TODO Otestovat, že najde v seznamu existující jméno
-    /*
-    Svatky svatky = new Svatky();
-    assertTrue(svatky.jeVSeznamu("Nataša"));
-    assertFalse(svatky.jeVSeznamu("Eva"));
-    assertFalse(svatky.jeVSeznamu("fksngi"));
-    */
-
         //Arrange
         Svatky svatky = new Svatky();
         String jmeno = "Nataša";
-        Boolean ocekavanyVysledek = true;
         //Act
         Boolean skutecnyVysledek = svatky.jeVSeznamu(jmeno);
         //Assert
@@ -96,7 +86,6 @@ class SvatkyTest {
         //Arrange
         Svatky svatky = new Svatky();
         String jmeno = "Tereza";
-        Boolean ocekavanyVysledek = false;
         //Act
         Boolean skutecnyVysledek = svatky.jeVSeznamu(jmeno);
         //Assert
@@ -147,7 +136,7 @@ class SvatkyTest {
         svatky.pridatSvatek(jmeno, denSvatku);
         MonthDay skutecnyDenSvatku = svatky.kdyMaSvatek(jmeno);
         //Assert
-        assertTrue(svatky.jeVSeznamu(jmeno));
+        assertNotNull(skutecnyDenSvatku);
         assertEquals(denSvatku, skutecnyDenSvatku);
     }
 
@@ -166,7 +155,7 @@ class SvatkyTest {
         svatky.pridatSvatek(jmeno, denSvatku, mesicSvatku);
         MonthDay skutecneDatumSvatku = svatky.kdyMaSvatek(jmeno);
         //Assert
-        assertTrue(svatky.jeVSeznamu(jmeno));
+        assertNotNull(skutecneDatumSvatku);
         assertEquals(denSvatku, skutecneDatumSvatku.getDayOfMonth());
         assertEquals(mesicSvatku, skutecneDatumSvatku.getMonthValue());
     }
@@ -186,7 +175,7 @@ class SvatkyTest {
         svatky.pridatSvatek(jmeno, denSvatku, mesicSvatku);
         MonthDay skutecneDatumSvatku = svatky.kdyMaSvatek(jmeno);
         //Assert
-        assertTrue(svatky.jeVSeznamu(jmeno));
+        assertNotNull(skutecneDatumSvatku);
         assertEquals(denSvatku, skutecneDatumSvatku.getDayOfMonth());
         assertEquals(mesicSvatku, skutecneDatumSvatku.getMonth());
     }
